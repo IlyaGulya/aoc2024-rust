@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::iter::zip;
 
 fn main() {
     let pairs =
@@ -7,26 +7,26 @@ fn main() {
             .map(|line| line.split_once("   ").unwrap())
             .map(|(s, v)| (s.parse::<u32>().unwrap(), v.parse::<u32>().unwrap()));
 
-    let first_seq =
+    let mut first_seq =
         pairs
             .clone()
             .map(|(a, _)| a)
             .collect::<Vec<u32>>();
 
-    let second_counts =
+    first_seq.sort();
+
+    let mut second_seq =
         pairs
             .clone()
             .map(|(_, b)| b)
-            .fold(HashMap::new(), |mut acc, b| {
-                *acc.entry(b).or_insert(0) += 1;
-                acc
-            });
+            .collect::<Vec<u32>>();
 
-    let score =
-        first_seq
-            .iter()
-            .map(|a| a * second_counts.get(a).unwrap_or(&0))
-            .sum::<u32>();
+    second_seq.sort();
 
-    println!("{}", score);
+    let dist: u32 =
+        zip(first_seq, second_seq)
+            .map(|(a, b)| a.abs_diff(b))
+            .sum();
+
+    println!("{}", dist);
 }
