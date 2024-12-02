@@ -4,11 +4,20 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+static-include-bytes = "2.0.0"
 
 [[bin]]
 name = "day1part1"
 path = "src/day1/part1/main.rs"
 
 [[bin]]
+name = "day1part1type"
+path = "src/day1/part1/main-typelevel.rs"
+
+[[bin]]
 name = "day1part2"
 path = "src/day1/part2/main.rs"
+
+[[bin]]
+name = "day2part1"
+path = "src/day2/part1/main.rs"
