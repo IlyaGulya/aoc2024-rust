@@ -1,22 +1,16 @@
 use std::collections::HashMap;
 
 fn main() {
-    let pairs =
+    let (first_seq, second_seq): (Vec<_>, Vec<_>) =
         include_str!("../input.txt")
             .lines()
             .map(|line| line.split_once("   ").unwrap())
-            .map(|(s, v)| (s.parse::<u32>().unwrap(), v.parse::<u32>().unwrap()));
-
-    let first_seq =
-        pairs
-            .clone()
-            .map(|(a, _)| a)
-            .collect::<Vec<u32>>();
+            .map(|(s, v)| (s.parse::<u32>().unwrap(), v.parse::<u32>().unwrap()))
+            .unzip();
 
     let second_counts =
-        pairs
-            .clone()
-            .map(|(_, b)| b)
+        second_seq
+            .iter()
             .fold(HashMap::new(), |mut acc, b| {
                 *acc.entry(b).or_insert(0) += 1;
                 acc
