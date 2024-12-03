@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 static-include-bytes = "2.0.0"
+regex = "1.11.1"
 
 [[bin]]
 name = "day1part1"
@@ -25,3 +26,7 @@ path = "src/day2/part1/main.rs"
 [[bin]]
 name = "day2part2"
 path = "src/day2/part2/main.rs"
+
+[[bin]]
+name = "day3part1"
+path = "src/day3/part1/main.rs"
