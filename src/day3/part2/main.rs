@@ -12,7 +12,7 @@ fn main() {
         Regex::new(r"((?<do>do)|(?<dont>don't))\(\)|(?<mul>mul\((?<a>\d{1,3}),(?<b>\d{1,3})\))")
             .unwrap();
 
-    let ops = valid_mul_regex
+    let (_, sum) = valid_mul_regex
         .captures_iter(include_str!("../input.txt"))
         .filter_map(|cap| {
             let do_op = cap.name("do").map(|_| Op::Do);
@@ -23,26 +23,17 @@ fn main() {
 
             do_op.or(dont_op).or(mul_op)
         })
-        .collect::<Vec<Op>>();
-
-    let mut enabled = true;
-    let mut sum = 0u32;
-
-    for op in ops {
-        match op {
+        .fold((true, 0), |(enabled, sum), op| match op {
             Op::Mul(a, b) => {
                 if enabled {
-                    sum += a * b
+                    (enabled, sum + a * b)
+                } else {
+                    (enabled, sum)
                 }
             }
-            Op::Do => {
-                enabled = true;
-            }
-            Op::Dont => {
-                enabled = false;
-            }
-        }
-    }
+            Op::Do => (true, sum),
+            Op::Dont => (false, sum),
+        });
 
     println!("{:?}", sum);
 }
