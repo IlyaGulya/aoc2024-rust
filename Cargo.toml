@@ -11,10 +11,6 @@ name = "day1part1"
 path = "src/day1/part1/main.rs"
 
 [[bin]]
-name = "day1part1type"
-path = "src/day1/part1/main-typelevel.rs"
-
-[[bin]]
 name = "day1part2"
 path = "src/day1/part2/main.rs"
 
@@ -41,3 +37,11 @@ path = "src/day4/part1/main.rs"
 [[bin]]
 name = "day4part2"
 path = "src/day4/part2/main.rs"
+
+[[bin]]
+name = "day5part1"
+path = "src/day5/part1/main.rs"
+
+[[bin]]
+name = "day5part2"
+path = "src/day5/part2/main.rs"
